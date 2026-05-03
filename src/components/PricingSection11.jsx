@@ -33,7 +33,7 @@ const plans = [
     desc: "Build your presence",
     paypalPlanId: "P-6YE201636M3399105NHUJI4Y",
     paypalUrl:
-      "https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-0P866796P0337163HNH3EXFA",
+      "https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-6YE201636M3399105NHUJI4Y",
     features: {
       collaboration: "Basic",
       promotion: "1-2 posts",
@@ -53,7 +53,7 @@ const plans = [
     popular: true,
     paypalPlanId: "P-2GS95942VA380420FNHNTIFY",
     paypalUrl:
-      "https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-3H869064TF125744RNH3ERJA",
+      "https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-2GS95942VA380420FNHNTIFY",
     features: {
       collaboration: "Priority",
       promotion: "Strong push",
@@ -72,7 +72,7 @@ const plans = [
     desc: "Scale & go premium",
     paypalPlanId: "P-9HJ82138NM274991HNHUJMKQ",
     paypalUrl:
-      "https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-1YP444449L590170PNH3EPPY",
+      "https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-9HJ82138NM274991HNHUJMKQ",
     features: {
       collaboration: "Paid access",
       promotion: "Max push",
@@ -241,8 +241,8 @@ export default function PremiumPricing() {
           align-items: center;
           justify-content: center;
           padding: 24px;
-          background: rgba(91, 133, 137, 0.24);
-          backdrop-filter: blur(12px);
+          background: rgba(24, 33, 39, 0.18);
+          backdrop-filter: blur(10px);
         }
 
         .checkout-modal {
@@ -250,13 +250,12 @@ export default function PremiumPricing() {
           width: min(100%, 760px);
           max-height: min(92vh, 920px);
           overflow-y: auto;
-          border-radius: 28px;
-          border: 1px solid rgba(255, 255, 255, 0.88);
-          background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(244, 250, 250, 0.82) 100%);
+          border-radius: 24px;
+          border: 1px solid #e2e8ec;
+          background: #ffffff;
           padding: 28px;
-          backdrop-filter: blur(26px);
-          box-shadow: 0 28px 60px rgba(18, 49, 57, 0.18);
-          color: #123139;
+          box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+          color: #182127;
         }
 
         .checkout-close {
@@ -265,10 +264,10 @@ export default function PremiumPricing() {
           right: 16px;
           width: 40px;
           height: 40px;
-          border: 1px solid rgba(28, 123, 128, 0.16);
+          border: 1px solid #e2e8ec;
           border-radius: 999px;
-          background: rgba(255, 255, 255, 0.84);
-          color: #31525a;
+          background: #ffffff;
+          color: #60707a;
           font-size: 1.2rem;
           cursor: pointer;
         }
@@ -279,21 +278,21 @@ export default function PremiumPricing() {
           font-weight: 600;
           letter-spacing: 0.16em;
           text-transform: uppercase;
-          color: #5e7a82;
+          color: #60707a;
         }
 
         .checkout-title {
           margin: 0;
-          font-size: clamp(1.7rem, 2vw, 2.2rem);
+          font-size: clamp(1.5rem, 2vw, 2rem);
           font-weight: 600;
-          color: #123139;
+          color: #182127;
         }
 
         .checkout-subtitle {
           margin: 12px 0 0;
           max-width: 560px;
-          color: #55727a;
-          font-size: 0.96rem;
+          color: #60707a;
+          font-size: 0.94rem;
           line-height: 1.6;
         }
 
@@ -311,8 +310,8 @@ export default function PremiumPricing() {
           min-height: 32px;
           padding: 0 14px;
           border-radius: 999px;
-          background: rgba(28, 123, 128, 0.12);
-          color: #0f5a60;
+          background: #f3f5f6;
+          color: #182127;
           font-size: 0.78rem;
           font-weight: 600;
           letter-spacing: 0.04em;
@@ -320,8 +319,8 @@ export default function PremiumPricing() {
         }
 
         .checkout-chip-muted {
-          background: rgba(255, 255, 255, 0.64);
-          color: #48656e;
+          background: #fafbfb;
+          color: #60707a;
         }
 
         .checkout-form {
@@ -349,19 +348,19 @@ export default function PremiumPricing() {
           font-weight: 600;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #64748b;
+          color: #60707a;
         }
 
         .checkout-field input,
         .checkout-field select,
         .checkout-field textarea {
           width: 100%;
-          border: 1px solid rgba(28, 123, 128, 0.12);
+          border: 1px solid #e2e8ec;
           border-radius: 14px;
           padding: 13px 14px;
-          background: rgba(255, 255, 255, 0.82);
-          color: #123139;
-          font-size: 0.96rem;
+          background: #ffffff;
+          color: #182127;
+          font-size: 0.94rem;
           outline: none;
           transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
@@ -369,8 +368,8 @@ export default function PremiumPricing() {
         .checkout-field input:focus,
         .checkout-field select:focus,
         .checkout-field textarea:focus {
-          border-color: rgba(28, 123, 128, 0.34);
-          box-shadow: 0 0 0 4px rgba(28, 123, 128, 0.1);
+          border-color: #b6c2c9;
+          box-shadow: 0 0 0 4px rgba(182, 194, 201, 0.18);
         }
 
         .checkout-field textarea {
@@ -403,14 +402,14 @@ export default function PremiumPricing() {
         }
 
         .checkout-button-primary {
-          background: linear-gradient(135deg, #1c7b80, #0f5a60);
+          background: #182127;
           color: #ffffff;
         }
 
         .checkout-button-secondary {
-          background: rgba(255, 255, 255, 0.8);
-          color: #123139;
-          border: 1px solid rgba(28, 123, 128, 0.12);
+          background: #f3f5f6;
+          color: #182127;
+          border: 1px solid #e2e8ec;
         }
 
         .checkout-button:disabled {
@@ -427,15 +426,15 @@ export default function PremiumPricing() {
         }
 
         .checkout-status-error {
-          background: rgba(254, 226, 226, 0.84);
+          background: rgba(254, 226, 226, 0.8);
           color: #991b1b;
           border: 1px solid rgba(248, 113, 113, 0.24);
         }
 
         .checkout-status-success {
-          background: rgba(223, 243, 241, 0.76);
-          color: #123139;
-          border: 1px solid rgba(28, 123, 128, 0.14);
+          background: #f7f8f8;
+          color: #182127;
+          border: 1px solid #e2e8ec;
         }
 
         .checkout-redirect-wrap {
@@ -447,22 +446,34 @@ export default function PremiumPricing() {
         .checkout-redirect-panel {
           border-radius: 20px;
           padding: 18px;
-          background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(237, 248, 247, 0.92));
-          border: 1px solid rgba(255, 255, 255, 0.95);
+          background: #fafbfb;
+          border: 1px solid #e2e8ec;
         }
 
         .checkout-redirect-title {
           margin: 0;
           font-size: 1rem;
           font-weight: 600;
-          color: #123139;
+          color: #182127;
         }
 
         .checkout-redirect-copy {
           margin: 8px 0 0;
-          color: #55727a;
+          color: #60707a;
           font-size: 0.92rem;
           line-height: 1.55;
+        }
+
+        .plans-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 20px;
+          align-items: stretch;
+        }
+
+        .plan-card {
+          width: 100%;
+          min-width: 0;
         }
 
         @media (max-width: 720px) {
@@ -489,35 +500,40 @@ export default function PremiumPricing() {
             align-items: center;
           }
         }
+
+        @media (max-width: 960px) {
+          .plans-grid {
+            grid-template-columns: 1fr;
+          }
+        }
       `}</style>
 
       <section
         className="pricing-section-shell"
         style={{
           background: "transparent",
-          padding: "12px 20px 28px",
+          padding: "0",
         }}
       >
         <div
           style={{
-            maxWidth: "1180px",
+            maxWidth: "100%",
             margin: "0 auto",
-            padding: "clamp(24px, 4vw, 34px)",
-            borderRadius: "34px",
-            background: "linear-gradient(180deg, rgba(255,255,255,0.74), rgba(255,255,255,0.42))",
-            backdropFilter: "blur(22px)",
-            border: "1px solid rgba(255,255,255,0.82)",
-            boxShadow: "0 24px 60px rgba(18,49,57,0.08)",
+            padding: "28px",
+            borderRadius: "24px",
+            background: "#ffffff",
+            border: "1px solid #e2e8ec",
+            boxShadow: "0 16px 36px rgba(15, 23, 42, 0.05)",
           }}
         >
-          <div style={{ textAlign: "center", marginBottom: "52px" }}>
+          <div style={{ textAlign: "center", marginBottom: "40px" }}>
             <p
               style={{
                 margin: 0,
-                color: "#5e7a82",
+                color: "#60707a",
                 fontSize: "12px",
                 fontWeight: 700,
-                letterSpacing: "0.18em",
+                letterSpacing: "0.16em",
                 textTransform: "uppercase",
               }}
             >
@@ -526,64 +542,56 @@ export default function PremiumPricing() {
             <h1
               style={{
                 margin: "10px 0 0",
-                fontSize: "clamp(2.6rem, 5vw, 4rem)",
-                fontWeight: 600,
-                color: "#123139",
-                fontFamily: '"Cormorant Garamond", serif',
-                lineHeight: 0.98,
+                fontSize: "clamp(1.9rem, 4vw, 2.5rem)",
+                fontWeight: 700,
+                letterSpacing: "-0.03em",
+                color: "#182127",
               }}
             >
-              Plans for magazine-ready growth
+              Plans for steady brand growth
             </h1>
             <p
               style={{
-                color: "#55727a",
+                color: "#60707a",
                 margin: "12px auto 0",
-                maxWidth: "680px",
+                maxWidth: "620px",
                 lineHeight: 1.7,
+                fontSize: "0.95rem",
               }}
             >
-              Choose the level of visibility and support that best matches your brand stage, then
-              move forward with a cleaner, more premium WI Thinkers experience.
+              Compare the options, choose the level that fits best, and continue with a simple
+              intake flow.
             </p>
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "30px",
-              flexWrap: "wrap",
-            }}
-          >
+          <div className="plans-grid">
             {plans.map((plan, index) => {
               const isMiddle = index === 1;
-              const baseTransform = isMiddle ? "scale(1.06)" : "scale(1)";
+              const baseTransform = isMiddle ? "scale(1.015)" : "scale(1)";
               const baseShadow = isMiddle
-                ? "0 25px 60px rgba(18,49,57,0.12)"
-                : "0 12px 30px rgba(18,49,57,0.08)";
+                ? "0 18px 34px rgba(15, 23, 42, 0.08)"
+                : "0 10px 24px rgba(15, 23, 42, 0.05)";
 
               return (
                 <div
                   key={plan.id}
+                  className="plan-card"
                   style={{
-                    width: "320px",
-                    padding: "28px",
-                    borderRadius: "24px",
+                    padding: "24px",
+                    borderRadius: "20px",
                     position: "relative",
                     cursor: "pointer",
                     transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                    background: "rgba(255,255,255,0.66)",
-                    backdropFilter: "blur(18px)",
-                    border: "1px solid rgba(255,255,255,0.78)",
+                    background: "#fafbfb",
+                    border: "1px solid #e2e8ec",
                     boxShadow: baseShadow,
                     transform: baseTransform,
                   }}
                   onMouseEnter={(event) => {
                     event.currentTarget.style.transform = isMiddle
-                      ? "translateY(-4px) scale(1.055)"
-                      : "translateY(-4px) scale(1.015)";
-                    event.currentTarget.style.boxShadow = "0 18px 40px rgba(18,49,57,0.12)";
+                      ? "translateY(-3px) scale(1.02)"
+                      : "translateY(-3px) scale(1.01)";
+                    event.currentTarget.style.boxShadow = "0 14px 28px rgba(15, 23, 42, 0.08)";
                   }}
                   onMouseLeave={(event) => {
                     event.currentTarget.style.transform = baseTransform;
@@ -597,30 +605,30 @@ export default function PremiumPricing() {
                         top: "-14px",
                         left: "50%",
                         transform: "translateX(-50%)",
-                        background: "linear-gradient(135deg, #1c7b80, #0f5a60)",
+                        background: "#182127",
                         color: "#fff",
                         fontSize: "12px",
                         padding: "6px 14px",
                         borderRadius: "999px",
                         fontWeight: 600,
-                        boxShadow: "0 10px 20px rgba(15,90,96,0.22)",
+                        boxShadow: "0 10px 20px rgba(15, 23, 42, 0.12)",
                       }}
                     >
                       Most popular
                     </div>
                   )}
 
-                  <h3 style={{ fontSize: "20px", fontWeight: 600, color: "#123139" }}>
+                  <h3 style={{ fontSize: "18px", fontWeight: 700, color: "#182127" }}>
                     {plan.title}
                   </h3>
 
-                  <p style={{ color: "#55727a", margin: "8px 0 18px", lineHeight: 1.6 }}>
+                  <p style={{ color: "#60707a", margin: "8px 0 18px", fontSize: "0.94rem" }}>
                     {plan.desc}
                   </p>
 
-                  <h2 style={{ fontSize: "44px", marginBottom: "20px", color: "#123139" }}>
+                  <h2 style={{ fontSize: "36px", marginBottom: "18px", color: "#182127" }}>
                     ${plan.price}
-                    <span style={{ fontSize: "14px", color: "#55727a" }}>/month</span>
+                    <span style={{ fontSize: "13px", color: "#60707a" }}>/month</span>
                   </h2>
 
                   <ul
@@ -649,16 +657,16 @@ export default function PremiumPricing() {
                             padding: "10px 12px",
                             borderRadius: "14px",
                             background: isSpotlight
-                              ? "linear-gradient(135deg, #14595c, #0f5a60)"
+                              ? "#182127"
                               : isIncluded
-                              ? "linear-gradient(180deg, rgba(255,255,255,0.94), rgba(245,251,251,0.96))"
-                              : "rgba(240, 247, 247, 0.82)",
+                              ? "#ffffff"
+                              : "#f3f5f6",
                             border: isSpotlight
-                              ? "1px solid rgba(170, 219, 211, 0.28)"
+                              ? "1px solid #182127"
                               : isIncluded
-                              ? "1px solid rgba(255,255,255,0.96)"
-                              : "1px solid rgba(214,229,228,0.78)",
-                            boxShadow: isSpotlight ? "0 14px 28px rgba(15,90,96,0.18)" : "none",
+                              ? "1px solid #e2e8ec"
+                              : "1px solid #e2e8ec",
+                            boxShadow: isSpotlight ? "0 10px 20px rgba(15, 23, 42, 0.12)" : "none",
                           }}
                         >
                           <div
@@ -722,10 +730,10 @@ export default function PremiumPricing() {
                                   fontSize: "13px",
                                   fontWeight: 500,
                                   color: isSpotlight
-                                    ? "#f4fbfb"
+                                    ? "#f8fafc"
                                     : isIncluded
-                                    ? "#123139"
-                                    : "#55727a",
+                                    ? "#182127"
+                                    : "#60707a",
                                   lineHeight: 1.35,
                                 }}
                               >
@@ -738,10 +746,10 @@ export default function PremiumPricing() {
                                 fontSize: "12px",
                                 fontWeight: 600,
                                 color: isSpotlight
-                                  ? "rgba(235,248,248,0.92)"
+                                  ? "rgba(226,232,240,0.92)"
                                   : isIncluded
-                                  ? "#48656e"
-                                  : "#86a0a6",
+                                  ? "#60707a"
+                                  : "#94a3b8",
                                 textAlign: "right",
                               }}
                             >
@@ -760,9 +768,9 @@ export default function PremiumPricing() {
                                 lineHeight: "1.2",
                                 fontWeight: 600,
                                 letterSpacing: "0.02em",
-                                color: "rgba(237,247,247,0.9)",
+                                color: "rgba(241,245,249,0.88)",
                                 background: "rgba(255,255,255,0.08)",
-                                border: "1px solid rgba(170,219,211,0.2)",
+                                border: "1px solid rgba(255,255,255,0.16)",
                               }}
                             >
                               {billboardNote}
@@ -783,11 +791,9 @@ export default function PremiumPricing() {
                       cursor: "pointer",
                       fontWeight: 600,
                       transition: "0.3s",
-                      background: plan.popular
-                        ? "linear-gradient(135deg, #1c7b80, #0f5a60)"
-                        : "rgba(255,255,255,0.78)",
-                      color: plan.popular ? "#fff" : "#123139",
-                      border: plan.popular ? "none" : "1px solid rgba(28,123,128,0.12)",
+                      background: plan.popular ? "#182127" : "#ffffff",
+                      color: plan.popular ? "#fff" : "#182127",
+                      border: "1px solid #e2e8ec",
                     }}
                     onClick={() => openCheckout(plan.id)}
                     onMouseEnter={(event) => {

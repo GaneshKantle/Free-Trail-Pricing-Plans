@@ -1,205 +1,409 @@
-import './App.css';
-import PricingSection11 from './components/PricingSection11';
+import { useEffect, useState } from "react";
+import "./App.css";
+import PricingSection11 from "./components/PricingSection11";
 
-const serviceHighlights = [
+const validPages = ["home", "about", "contact"];
+
+const homeHighlights = [
   {
-    title: 'Editorial Positioning',
-    copy: 'Shape your public presence with a cleaner, more polished magazine-style presentation.',
+    title: "Editorial presence",
+    copy: "Position your brand, profile, or campaign with a refined, magazine-level presentation.",
   },
   {
-    title: 'Promotion Support',
-    copy: 'Pair visibility with thoughtful campaign structure so your growth feels premium and intentional.',
+    title: "Effortless flow",
+    copy: "A clear structure that helps visitors understand the offering and move forward without friction.",
   },
   {
-    title: 'Flexible Growth Plans',
-    copy: 'Start where you are and scale into stronger placements, priority support, and premium momentum.',
+    title: "Designed to evolve",
+    copy: "Begin with the essentials and expand into stronger visibility, sharper positioning, and deeper support.",
   },
 ];
 
-const aboutCards = [
+const aboutPoints = [
   {
-    title: 'Magazine-first thinking',
-    copy: 'Every service is designed to make your brand feel curated, publishable, and aligned with editorial quality.',
+    title: "Adaptive by design",
+    copy: "Built to support creators, brands, professionals, and campaign-driven projects with equal clarity.",
   },
   {
-    title: 'Built for modern creators',
-    copy: 'The structure works for individual talent, personal brands, and collaboration-led campaigns that need clarity.',
+    title: "Refined brand experience",
+    copy: "Every element is shaped to present WI Thinkers with precision, consistency, and intent.",
   },
   {
-    title: 'Growth with polish',
-    copy: 'We focus on visibility that feels elevated, helping you move from scattered presence to stronger positioning.',
+    title: "Clarity over clutter",
+    copy: "A minimal structure that keeps the message focused and the next steps easy to follow.",
   },
 ];
 
-const contactCards = [
+const contactSteps = [
   {
-    title: 'Choose a plan',
-    copy: 'Select the level that fits your current stage and open the built-in intake flow in just a few clicks.',
+    title: "Select your plan",
+    copy: "Review the available options and choose the level that aligns with your current direction.",
   },
   {
-    title: 'Share your brief',
-    copy: 'Use the details field during checkout to explain your goals, timeline, audience, and collaboration needs.',
+    title: "Define your brief",
+    copy: "Share your goals, audience, timeline, and creative direction to set a clear foundation.",
   },
   {
-    title: 'Start aligned',
-    copy: 'Your information reaches the WI Thinkers team before payment so the right service path can be prepared.',
+    title: "Proceed with alignment",
+    copy: "With the right inputs in place, the next steps become structured, efficient, and purposeful.",
   },
 ];
+
+function getRouteState() {
+  if (typeof window === "undefined") {
+    return { page: "home", section: "" };
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const page = params.get("page");
+  const section = params.get("section") || "";
+
+  return {
+    page: validPages.includes(page) ? page : "home",
+    section,
+  };
+}
+
+function buildUrl(page, section = "") {
+  if (typeof window === "undefined") {
+    return "/";
+  }
+
+  const params = new URLSearchParams();
+
+  if (page !== "home") {
+    params.set("page", page);
+  }
+
+  if (section) {
+    params.set("section", section);
+  }
+
+  const query = params.toString();
+  return `${window.location.pathname}${query ? `?${query}` : ""}`;
+}
+
+function NavItem({ currentPage, label, page, onNavigate }) {
+  const isActive = currentPage === page;
+
+  return (
+    <a
+      className={`nav-link ${isActive ? "nav-link-active" : ""}`.trim()}
+      href={buildUrl(page)}
+      onClick={onNavigate(page)}
+      aria-current={isActive ? "page" : undefined}
+    >
+      {label}
+    </a>
+  );
+}
+
+function FooterItem({ label, page, onNavigate }) {
+  return (
+    <a className="footer-link" href={buildUrl(page)} onClick={onNavigate(page)}>
+      {label}
+    </a>
+  );
+}
+
+function HomePage({ onNavigate }) {
+  return (
+    <>
+      <section className="page-card page-hero">
+        <p className="eyebrow">WI Thinkers</p>
+        <h1 className="page-title">Magazine Services</h1>
+        <p className="page-copy">
+          A simpler service page for editorial-style promotion, better
+          presentation, and a more polished public image.
+        </p>
+
+        <div className="page-actions">
+          <a
+            className="button button-primary"
+            href={buildUrl("home", "plans")}
+            onClick={onNavigate("home", "plans")}
+          >
+            View Plans
+          </a>
+          <a
+            className="button button-secondary"
+            href={buildUrl("about")}
+            onClick={onNavigate("about")}
+          >
+            About Us
+          </a>
+        </div>
+
+        <div className="mini-grid">
+          {homeHighlights.map((item) => (
+            <article className="mini-card" key={item.title}>
+              <h2>{item.title}</h2>
+              <p>{item.copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section
+        className="page-section"
+        id="plans"
+        aria-labelledby="plans-title"
+      >
+        <div className="section-intro">
+          <p className="eyebrow">Plans</p>
+          <h2 className="section-title" id="plans-title">
+            Choose the service level that fits now
+          </h2>
+          <p className="section-copy">
+            The pricing section stays on the home page so visitors can move from
+            overview to action without extra steps.
+          </p>
+        </div>
+
+        <div className="pricing-wrap">
+          <PricingSection11 />
+        </div>
+      </section>
+    </>
+  );
+}
+
+function AboutPage({ onNavigate }) {
+  return (
+    <section className="page-card page-panel">
+      <p className="eyebrow">About</p>
+      <h1 className="page-title">About WI Thinkers Magazine Services</h1>
+      <p className="page-copy">
+        We don’t just publish magazines. We build presence.
+      </p>
+      <div className="copy-stack">
+        <p>
+          This platform was created for those who understand that visibility
+          isn’t accidental — it’s crafted. Every feature, every cover, every
+          story is a deliberate composition of identity, aesthetic, and intent.
+        </p>
+        <p>
+        Rooted in fashion, beauty, and visual culture, our work goes beyond surface-level content. We curate narratives that capture individuality while aligning with a global standard of editorial excellence. From emerging talent to established faces, each inclusion is selected with purpose — not volume.
+        </p>
+        <p>
+        Our ecosystem is designed to bridge talent with exposure. Through curated submissions, editorial placements, and digital amplification, we position creators where they are not just seen, but remembered.
+        </p>
+        <p>
+        For contributors, this is more than a feature — it’s positioning.
+        </p>
+        <p>
+        For readers, it’s a window into what defines relevance today and what shapes it tomorrow.        </p>
+        <p>
+        We don’t follow trends.
+        <br/>
+        We refine them, frame them, and publish them.</p>
+      </div>
+   
+      <div className="mini-grid">
+        {aboutPoints.map((item) => (
+          <article className="mini-card" key={item.title}>
+            <h2>{item.title}</h2>
+            <p>{item.copy}</p>
+          </article>
+        ))}
+      </div>
+      <div className="page-actions">
+        <a
+          className="button button-primary"
+          href={buildUrl("home", "plans")}
+          onClick={onNavigate("home", "plans")}
+        >
+          View Plans
+        </a>
+        <a
+          className="button button-secondary"
+          href={buildUrl("contact")}
+          onClick={onNavigate("contact")}
+        >
+          Contact Page
+        </a>
+      </div>
+    </section>
+  );
+}
+
+function ContactPage({ onNavigate }) {
+  return (
+<section className="page-card page-panel">
+  <p className="eyebrow">Contact</p>
+  <h1 className="page-title">Start with clarity</h1>
+  <p className="page-copy">
+    A well-defined brief sets the tone for everything that follows. Take a
+    moment to choose the plan that fits your intent, then share the details
+    that help us understand your vision with precision.
+  </p>
+
+  <div className="copy-stack">
+    <p>
+      This space is designed to keep things focused. Instead of overwhelming
+      you with options, we guide you toward the next step that actually
+      matters.
+    </p>
+    <p>
+      When reaching out, include your objective, audience, timeline, and any
+      creative direction you already have in mind. The clearer the input, the
+      sharper and more aligned the outcome.
+    </p>
+  </div>
+
+  <div className="mini-grid">
+    {contactSteps.map((item) => (
+      <article className="mini-card" key={item.title}>
+        <h2>{item.title}</h2>
+        <p>{item.copy}</p>
+      </article>
+    ))}
+  </div>
+
+  <div className="page-actions">
+    <a
+      className="button button-primary"
+      href={buildUrl("home", "plans")}
+      onClick={onNavigate("home", "plans")}
+    >
+      Choose a Plan
+    </a>
+    <a
+      className="button button-secondary"
+      href={buildUrl("about")}
+      onClick={onNavigate("about")}
+    >
+      Read About
+    </a>
+  </div>
+</section>
+  );
+}
 
 function App() {
+  const [{ page, section }, setRouteState] = useState(getRouteState);
+
+  useEffect(() => {
+    const syncRoute = () => {
+      setRouteState(getRouteState());
+    };
+
+    window.addEventListener("popstate", syncRoute);
+    return () => window.removeEventListener("popstate", syncRoute);
+  }, []);
+
+  useEffect(() => {
+    if (page === "home" && section) {
+      const frame = window.requestAnimationFrame(() => {
+        const target = document.getElementById(section);
+
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+
+      return () => window.cancelAnimationFrame(frame);
+    }
+
+    if (!/jsdom/i.test(window.navigator.userAgent)) {
+      window.scrollTo(0, 0);
+    }
+
+    return undefined;
+  }, [page, section]);
+
+  const navigateTo =
+    (nextPage, nextSection = "") =>
+    (event) => {
+      event.preventDefault();
+
+      const nextState = {
+        page: nextPage,
+        section: nextSection,
+      };
+
+      window.history.pushState(nextState, "", buildUrl(nextPage, nextSection));
+      setRouteState(nextState);
+    };
+
+  let pageContent = <HomePage onNavigate={navigateTo} />;
+
+  if (page === "about") {
+    pageContent = <AboutPage onNavigate={navigateTo} />;
+  }
+
+  if (page === "contact") {
+    pageContent = <ContactPage onNavigate={navigateTo} />;
+  }
+
   return (
-    <div className="services-page" id="top">
+    <div className="site-shell">
       <header className="site-header">
         <div className="container header-inner">
-          <a className="logo-link" href="#top" aria-label="WI Thinkers Magazine Services home">
-            <span className="logo-mark">WI</span>
-            <span className="logo-copy">
-              <span className="logo-text">WI Thinkers</span>
-              <span className="logo-subtext">Magazine Services</span>
-            </span>
+          <a
+            className="brand-link"
+            href={buildUrl("home")}
+            onClick={navigateTo("home")}
+          >
+            <span className="brand-kicker">WI Thinkers</span>
+            <span className="brand-title">Magazine Services</span>
           </a>
 
           <nav className="site-nav" aria-label="Main navigation">
-            <a href="#services">Services</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+            <NavItem
+              currentPage={page}
+              label="Home"
+              page="home"
+              onNavigate={navigateTo}
+            />
+            <NavItem
+              currentPage={page}
+              label="About"
+              page="about"
+              onNavigate={navigateTo}
+            />
+            <NavItem
+              currentPage={page}
+              label="Contact"
+              page="contact"
+              onNavigate={navigateTo}
+            />
           </nav>
 
-          <a className="nav-cta" href="#plans">
+          <a
+            className="header-cta"
+            href={buildUrl("home", "plans")}
+            onClick={navigateTo("home", "plans")}
+          >
             View Plans
           </a>
         </div>
       </header>
 
-      <main className="services-main">
-        <section
-          className="services-intro container anchor-section"
-          id="services"
-          aria-labelledby="services-title"
-        >
-          <div className="intro-panel">
-            <p className="section-kicker">Editorial Growth Studio</p>
-
-            <div className="intro-grid">
-              <div>
-                <h1 id="services-title">Magazine Services by WI Thinkers</h1>
-                <p className="intro-copy">
-                  Premium magazine-style services for creators, talent, and modern brands that
-                  want a polished public presence, stronger visibility, and growth that feels
-                  intentional.
-                </p>
-              </div>
-
-              <div className="intro-note">
-                <span className="note-pill">Light glassmorphism</span>
-                <p>
-                  The experience stays clean and airy while keeping the same editorial mood,
-                  making the service page feel more premium without drifting away from the
-                  existing theme.
-                </p>
-              </div>
-            </div>
-
-            <div className="intro-highlights" aria-label="Service highlights">
-              {serviceHighlights.map((item) => (
-                <article className="highlight-card" key={item.title}>
-                  <h2>{item.title}</h2>
-                  <p>{item.copy}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <div className="anchor-section" id="plans">
-          <PricingSection11 />
-        </div>
-
-        <section className="content-section container anchor-section" id="about" aria-labelledby="about-title">
-          <div className="glass-section">
-            <p className="section-kicker">About</p>
-            <h2 className="section-heading" id="about-title">
-              A more polished way to present creative talent
-            </h2>
-            <p className="section-copy">
-              WI Thinkers builds magazine service experiences for creators and brands that want to
-              look more refined, more credible, and more ready for the next opportunity. Instead of
-              generic promotion, the focus is on presentation, positioning, and visibility that
-              feels professionally curated.
-            </p>
-            <p className="section-copy">
-              Whether you are strengthening a personal brand, preparing for collaborations, or
-              creating a stronger editorial identity, these services are structured to help you move
-              with more confidence and consistency. The goal is simple: make your growth look as
-              premium as the work behind it.
-            </p>
-
-            <div className="feature-grid">
-              {aboutCards.map((item) => (
-                <article className="feature-card" key={item.title}>
-                  <h3>{item.title}</h3>
-                  <p>{item.copy}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="content-section container anchor-section" id="contact" aria-labelledby="contact-title">
-          <div className="glass-section">
-            <p className="section-kicker">Contact</p>
-            <h2 className="section-heading" id="contact-title">
-              Start the conversation with the right brief
-            </h2>
-            <p className="section-copy">
-              Choose a plan to begin right away, then use the intake form to share your project
-              goals, brand direction, collaboration needs, and timeline. That keeps every request
-              organized and gives the WI Thinkers team the context needed to support you properly.
-            </p>
-
-            <div className="contact-grid">
-              {contactCards.map((item) => (
-                <article className="contact-card" key={item.title}>
-                  <h3>{item.title}</h3>
-                  <p>{item.copy}</p>
-                </article>
-              ))}
-            </div>
-
-            <div className="section-actions">
-              <a className="section-button section-button-primary" href="#plans">
-                Choose a Plan
-              </a>
-              <a className="section-button section-button-secondary" href="#about">
-                Read About the Service
-              </a>
-            </div>
-          </div>
-        </section>
+      <main className="site-main">
+        <div className="container">{pageContent}</div>
       </main>
 
       <footer className="site-footer">
-        <div className="container">
-          <div className="footer-shell">
-            <div className="footer-brand">
-              <p className="section-kicker">WI Thinkers</p>
-              <h2>Magazine Services</h2>
-              <p>
-                A cleaner, more general service experience for creators, talent, and brands that
-                want editorial-style growth support.
+        <div className="footer-card">
+          <div className="footer-inner">
+            <div className="footer-copy">
+              <p className="eyebrow">WI Thinkers</p>
+              <p className="footer-title">Magazine Services by WI Thinkers</p>
+              <p className="footer-text">
+                A cleaner and more minimal service experience for
+                editorial-style promotion, positioning, and brand presentation.
               </p>
             </div>
 
-            <div className="footer-column">
-              <h3>Navigate</h3>
-              <a href="#services">Services</a>
-              <a href="#about">About</a>
-              <a href="#contact">Contact</a>
-            </div>
-
-            <div className="footer-column">
-              <h3>How It Works</h3>
-              <p>Explore the plans, choose the best fit, and send your brief through the intake flow to get started.</p>
+            <div className="footer-links">
+              <FooterItem label="Home" page="home" onNavigate={navigateTo} />
+              <FooterItem label="About" page="about" onNavigate={navigateTo} />
+              <FooterItem
+                label="Contact"
+                page="contact"
+                onNavigate={navigateTo}
+              />
             </div>
           </div>
         </div>
