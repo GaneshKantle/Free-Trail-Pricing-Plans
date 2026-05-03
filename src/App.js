@@ -3,6 +3,11 @@ import "./App.css";
 import PricingSection11 from "./components/PricingSection11";
 
 const validPages = ["home", "about", "contact"];
+const CONTACT_EMAIL = "Business@theglammodel.com";
+const CONTACT_FORMSPREE_ENDPOINT = "https://formspree.io/f/xeevadbw";
+const CUSTOMER_CARE_SUBJECT = "[WI Thinkers Customer Care] Website Contact Request";
+const CUSTOMER_CARE_TAG = "WI-CARE-WEBSITE";
+const DIRECT_GMAIL_TAG = "WI-CARE-DIRECT";
 
 const homeHighlights = [
   {
@@ -31,21 +36,6 @@ const aboutPoints = [
   {
     title: "Clarity over clutter",
     copy: "A minimal structure that keeps the message focused and the next steps easy to follow.",
-  },
-];
-
-const contactSteps = [
-  {
-    title: "Select your plan",
-    copy: "Review the available options and choose the level that aligns with your current direction.",
-  },
-  {
-    title: "Define your brief",
-    copy: "Share your goals, audience, timeline, and creative direction to set a clear foundation.",
-  },
-  {
-    title: "Proceed with alignment",
-    copy: "With the right inputs in place, the next steps become structured, efficient, and purposeful.",
   },
 ];
 
@@ -81,6 +71,34 @@ function buildUrl(page, section = "") {
 
   const query = params.toString();
   return `${window.location.pathname}${query ? `?${query}` : ""}`;
+}
+
+function getContactErrorMessage(result) {
+  if (!result || !Array.isArray(result.errors) || result.errors.length === 0) {
+    return "We could not send your message right now. Please try again.";
+  }
+
+  return result.errors.map((item) => item.message).join(" ");
+}
+
+function buildGmailComposeUrl({ name = "", email = "", content = "" } = {}) {
+  const params = new URLSearchParams({
+    view: "cm",
+    fs: "1",
+    to: CONTACT_EMAIL,
+    su: "[WI Thinkers Customer Care] Direct Gmail Inquiry",
+    body: [
+      `Customer care tag: ${DIRECT_GMAIL_TAG}`,
+      "",
+      `Name: ${name || "-"}`,
+      `Email: ${email || "-"}`,
+      "",
+      "Message:",
+      content || "",
+    ].join("\n"),
+  });
+
+  return `https://mail.google.com/mail/?${params.toString()}`;
 }
 
 function NavItem({ currentPage, label, page, onNavigate }) {
@@ -228,55 +246,202 @@ function AboutPage({ onNavigate }) {
 }
 
 function ContactPage({ onNavigate }) {
+  const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    content: "",
+  });
+  const [submitState, setSubmitState] = useState({
+    submitting: false,
+    error: "",
+    success: "",
+  });
+
+  const gmailComposeUrl = buildGmailComposeUrl(formValues);
+
+  const handleFieldChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormValues((current) => ({
+      ...current,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    setSubmitState({
+      submitting: true,
+      error: "",
+      success: "",
+    });
+
+    const payload = new FormData();
+    payload.append("_subject", CUSTOMER_CARE_SUBJECT);
+    payload.append("customer_care_tag", CUSTOMER_CARE_TAG);
+    payload.append("message_type", "Customer Care Inquiry");
+    payload.append("destination_email", CONTACT_EMAIL);
+    payload.append("source_page", "WI Thinkers Contact Page");
+    payload.append("name", formValues.name.trim());
+    payload.append("email", formValues.email.trim());
+    payload.append("message", formValues.content.trim());
+
+    try {
+      const response = await fetch(CONTACT_FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: payload,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        setSubmitState({
+          submitting: false,
+          error: getContactErrorMessage(result),
+          success: "",
+        });
+        return;
+      }
+
+      setSubmitState({
+        submitting: false,
+        error: "",
+        success: `Your message was sent with the fixed customer care tag ${CUSTOMER_CARE_TAG}.`,
+      });
+      setFormValues({
+        name: "",
+        email: "",
+        content: "",
+      });
+    } catch {
+      setSubmitState({
+        submitting: false,
+        error: "Network error. Please try again.",
+        success: "",
+      });
+    }
+  };
+
   return (
-<section className="page-card page-panel">
-  <p className="eyebrow">Contact</p>
-  <h1 className="page-title">Start with clarity</h1>
-  <p className="page-copy">
-    A well-defined brief sets the tone for everything that follows. Take a
-    moment to choose the plan that fits your intent, then share the details
-    that help us understand your vision with precision.
-  </p>
+    <section className="page-card page-panel">
+      <p className="eyebrow">Contact</p>
+      <h1 className="page-title">Customer care and direct email</h1>
+      <p className="page-copy">
+        Click here to email us directly in Gmail at{" "}
+        <a
+          className="inline-email-link"
+          href={gmailComposeUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {CONTACT_EMAIL}
+        </a>
+        , or use the website form below to send a customer care request.
+      </p>
 
-  <div className="copy-stack">
-    <p>
-      This space is designed to keep things focused. Instead of overwhelming
-      you with options, we guide you toward the next step that actually
-      matters.
-    </p>
-    <p>
-      When reaching out, include your objective, audience, timeline, and any
-      creative direction you already have in mind. The clearer the input, the
-      sharper and more aligned the outcome.
-    </p>
-  </div>
+      <div className="copy-stack">
+        <p>
+          This space is designed to keep things focused. Instead of
+          overwhelming you with options, we guide you toward the next step
+          that actually matters.
+        </p>
+        <p>
+          When reaching out, include your objective, audience, timeline, and
+          any creative direction you already have in mind. The clearer the
+          input, the sharper and more aligned the outcome.
+        </p>
+      </div>
 
-  <div className="mini-grid">
-    {contactSteps.map((item) => (
-      <article className="mini-card" key={item.title}>
-        <h2>{item.title}</h2>
-        <p>{item.copy}</p>
-      </article>
-    ))}
-  </div>
+      <div className="contact-layout contact-layout-single">
+        <div className="contact-panel">
+          <h2>Send through the website</h2>
+          <p>
+            Enter your name, email, and message. This form automatically adds
+            a locked customer care subject line and tag so it stands out from
+            regular inbox noise.
+          </p>
 
-  <div className="page-actions">
-    <a
-      className="button button-primary"
-      href={buildUrl("home", "plans")}
-      onClick={onNavigate("home", "plans")}
-    >
-      Choose a Plan
-    </a>
-    <a
-      className="button button-secondary"
-      href={buildUrl("about")}
-      onClick={onNavigate("about")}
-    >
-      Read About
-    </a>
-  </div>
-</section>
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <div className="contact-form-grid">
+              <label className="form-field">
+                <span className="form-label">Name</span>
+                <input
+                  type="text"
+                  name="name"
+                  value={formValues.name}
+                  onChange={handleFieldChange}
+                  placeholder="Your name"
+                  required
+                />
+              </label>
+
+              <label className="form-field">
+                <span className="form-label">Email</span>
+                <input
+                  type="email"
+                  name="email"
+                  value={formValues.email}
+                  onChange={handleFieldChange}
+                  placeholder="you@example.com"
+                  required
+                />
+              </label>
+
+              <label className="form-field form-field-full">
+                <span className="form-label">Message</span>
+                <textarea
+                  name="content"
+                  value={formValues.content}
+                  onChange={handleFieldChange}
+                  placeholder="Write your message here."
+                  required
+                />
+              </label>
+            </div>
+
+            {/* <div className="contact-fixed-note">
+              Fixed email subject: <strong>{CUSTOMER_CARE_SUBJECT}</strong>
+            </div>
+            <div className="contact-fixed-note">
+              Fixed customer care tag: <strong>{CUSTOMER_CARE_TAG}</strong>
+            </div> */}
+
+            {submitState.error && (
+              <div className="contact-status contact-status-error">
+                {submitState.error}
+              </div>
+            )}
+
+            {submitState.success && (
+              <div className="contact-status contact-status-success">
+                {submitState.success}
+              </div>
+            )}
+
+            <div className="contact-form-actions">
+              <button
+                className="button button-primary"
+                type="submit"
+                disabled={submitState.submitting}
+              >
+                {submitState.submitting ? "Sending..." : "Send Message"}
+              </button>
+              <a
+                className="button button-secondary"
+                href={buildUrl("home", "plans")}
+                onClick={onNavigate("home", "plans")}
+              >
+                View Plans
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
   );
 }
 
