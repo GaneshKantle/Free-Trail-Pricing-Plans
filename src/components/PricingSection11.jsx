@@ -33,7 +33,7 @@ const plans = [
     desc: "Build your presence",
     paypalPlanId: "P-6YE201636M3399105NHUJI4Y",
     paypalUrl:
-      "https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-6YE201636M3399105NHUJI4Y",
+      "https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-0P866796P0337163HNH3EXFA",
     features: {
       collaboration: "Basic",
       promotion: "1-2 posts",
@@ -53,7 +53,7 @@ const plans = [
     popular: true,
     paypalPlanId: "P-2GS95942VA380420FNHNTIFY",
     paypalUrl:
-      "https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-2GS95942VA380420FNHNTIFY",
+      "https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-3H869064TF125744RNH3ERJA",
     features: {
       collaboration: "Priority",
       promotion: "Strong push",
@@ -72,7 +72,7 @@ const plans = [
     desc: "Scale & go premium",
     paypalPlanId: "P-9HJ82138NM274991HNHUJMKQ",
     paypalUrl:
-      "https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-9HJ82138NM274991HNHUJMKQ",
+      "https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-1YP444449L590170PNH3EPPY",
     features: {
       collaboration: "Paid access",
       promotion: "Max push",
