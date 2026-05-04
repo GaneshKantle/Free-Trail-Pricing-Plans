@@ -127,41 +127,6 @@ function FooterItem({ label, page, onNavigate }) {
 function HomePage({ onNavigate }) {
   return (
     <>
-      <section className="page-card page-hero">
-        <p className="eyebrow">WI Thinkers</p>
-        <h1 className="page-title">Magazine Services</h1>
-        <p className="page-copy">
-          A simpler service page for editorial-style promotion, better
-          presentation, and a more polished public image.
-        </p>
-
-        <div className="page-actions">
-          <a
-            className="button button-primary"
-            href={buildUrl("home", "plans")}
-            onClick={onNavigate("home", "plans")}
-          >
-            View Plans
-          </a>
-          <a
-            className="button button-secondary"
-            href={buildUrl("about")}
-            onClick={onNavigate("about")}
-          >
-            About Us
-          </a>
-        </div>
-
-        <div className="mini-grid">
-          {homeHighlights.map((item) => (
-            <article className="mini-card" key={item.title}>
-              <h2>{item.title}</h2>
-              <p>{item.copy}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section
         className="page-section"
         id="plans"
