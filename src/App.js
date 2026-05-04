@@ -133,7 +133,7 @@ function HomePage({ onNavigate }) {
         id="plans"
         aria-labelledby="plans-title"
       >
-        <div className="section-intro">
+        {/* <div className="section-intro">
           <p className="eyebrow">Plans</p>
           <h2 className="section-title" id="plans-title">
             Choose the service level that fits now
@@ -142,7 +142,7 @@ function HomePage({ onNavigate }) {
             The pricing section stays on the home page so visitors can move from
             overview to action without extra steps.
           </p>
-        </div>
+        </div> */}
 
         <div className="pricing-wrap">
           <PricingSection11 />
