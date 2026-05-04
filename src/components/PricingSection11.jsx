@@ -562,6 +562,17 @@ export default function PremiumPricing() {
               Compare the options, choose the level that fits best, and continue with a simple
               intake flow.
             </p>
+            <p
+              style={{
+                color: "#60707a",
+                margin: "12px auto 0",
+                maxWidth: "620px",
+                lineHeight: 1.7,
+                fontSize: "0.95rem",
+              }}
+            >
+             Free Trail First Month
+            </p>
           </div>
 
           <div className="plans-grid">
