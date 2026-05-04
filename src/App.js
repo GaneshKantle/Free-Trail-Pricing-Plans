@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import "./App.css";
 import PricingSection11 from "./components/PricingSection11";
@@ -9,20 +10,20 @@ const CUSTOMER_CARE_SUBJECT = "[WI Thinkers Customer Care] Website Contact Reque
 const CUSTOMER_CARE_TAG = "WI-CARE-WEBSITE";
 const DIRECT_GMAIL_TAG = "WI-CARE-DIRECT";
 
-const homeHighlights = [
-  {
-    title: "Editorial presence",
-    copy: "Position your brand, profile, or campaign with a refined, magazine-level presentation.",
-  },
-  {
-    title: "Effortless flow",
-    copy: "A clear structure that helps visitors understand the offering and move forward without friction.",
-  },
-  {
-    title: "Designed to evolve",
-    copy: "Begin with the essentials and expand into stronger visibility, sharper positioning, and deeper support.",
-  },
-];
+// const homeHighlights = [
+//   {
+//     title: "Editorial presence",
+//     copy: "Position your brand, profile, or campaign with a refined, magazine-level presentation.",
+//   },
+//   {
+//     title: "Effortless flow",
+//     copy: "A clear structure that helps visitors understand the offering and move forward without friction.",
+//   },
+//   {
+//     title: "Designed to evolve",
+//     copy: "Begin with the essentials and expand into stronger visibility, sharper positioning, and deeper support.",
+//   },
+// ];
 
 const aboutPoints = [
   {
